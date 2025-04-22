@@ -1,9 +1,11 @@
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const ReactRefreshTypeScript = require("react-refresh-typescript").default;
 const isDevelopment = process.env.NODE_ENV !== "production";
+require("dotenv").config();
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -50,7 +52,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"],
+        use: [
+          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
@@ -68,5 +75,8 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
+    new webpack.DefinePlugin({
+      "process.env.COIN_GECKO_API_URL": JSON.stringify(process.env.COIN_GECKO_API_URL),
+    }),
   ].filter(Boolean),
 };

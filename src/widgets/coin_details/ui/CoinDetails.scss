@@ -1,0 +1,41 @@
+.coin__details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &__main {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    &__avatar {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      padding: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-secondary);
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+
+      &__coin-name {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+    }
+  }
+}

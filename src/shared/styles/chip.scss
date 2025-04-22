@@ -1,0 +1,47 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 16px;
+  background-color: #e0e0e0;
+  color: #333;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  cursor: default;
+
+  &__icon {
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+  }
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &--default {
+    background-color: var(--bg-dark-tertiary);
+    color: white;
+  }
+
+  &--primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  &--secondary {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+
+  &--success {
+    background-color: var(--color-success);
+    color: white;
+  }
+
+  &--danger {
+    background-color: var(--color-danger);
+    color: white;
+  }
+}
