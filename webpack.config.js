@@ -1,7 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ReactRefreshTypeScript = require("react-refresh-typescript").default;
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
     publicPath: "/",
   },
   mode: isDevelopment ? "development" : "production",
-  devTool: isDevelopment ? "source-map" : false,
+  devtool: isDevelopment ? "source-map" : false,
   devServer: {
     historyApiFallback: true,
     static: path.resolve(__dirname, "public"),
@@ -32,19 +33,31 @@ module.exports = {
           {
             loader: "babel-loader",
             options: {
-              plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean),
+              plugins: [isDevelopment && require.resolve("react-refresh/babel")].filter(Boolean),
             },
           },
-          "ts-loader",
+          {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [isDevelopment && ReactRefreshTypeScript()].filter(Boolean),
+              }),
+            },
+          },
         ],
         exclude: /node_modules/,
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(mp3)$/i,
         type: "asset/resource",
       },
     ],
@@ -52,9 +65,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      favicon: "./public/favicon.ico",
     }),
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
-}
+};
