@@ -1,3 +1,15 @@
-div {
-  background-color: green;
+@use "./variables" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  object-fit: cover;
+}
+
+button {
+  cursor: pointer;
 }
