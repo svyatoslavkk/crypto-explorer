@@ -1,8 +1,7 @@
 .chip {
   display: inline-flex;
-  align-items: center;
+  align-items: end;
   padding: 4px 8px;
-  font-size: 14px;
   border-radius: 16px;
   background-color: #e0e0e0;
   color: #333;
@@ -14,6 +13,10 @@
     margin-right: 6px;
     display: flex;
     align-items: center;
+  }
+
+  &__label {
+    font-size: 12px;
   }
 
   &--clickable {

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import CoinDetails from "../../../widgets/coin_details/ui/CoinDetails";
 import "./CoinPage.scss";
-import { AssetSearchDropdownWrapper } from "../../../features";
+import { AssetSearchDropdownWrapper, CoinLiveChart } from "../../../features";
 import GasPriceTracker from "../../../widgets/gas_price_tracker/ui/GasPriceTracker";
 
 const CoinPage = () => {
@@ -15,6 +15,7 @@ const CoinPage = () => {
         <CoinDetails coinId={coinId} />
         <AssetSearchDropdownWrapper />
         <GasPriceTracker />
+        <CoinLiveChart coinId={coinId} />
       </div>
     </div>
   );

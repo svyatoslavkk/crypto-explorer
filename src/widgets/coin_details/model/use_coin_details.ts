@@ -10,7 +10,7 @@ export const useCoinDetails = (coinId: string) => {
     const getCoinData = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${process.env.COIN_GECKO_API_URL}/coins/${coinId}`);
+        const res = await fetch(`${process.env.COIN_GECKO_API_URL}/coins/${coinId}?sparkline=true`);
         if (!res.ok) throw new Error("Failed to fetch coin data");
         const data = await res.json();
         setCoinData(data);

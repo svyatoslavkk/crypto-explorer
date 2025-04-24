@@ -79,6 +79,9 @@ module.exports = {
       "process.env.COIN_GECKO_API_URL": JSON.stringify(process.env.COIN_GECKO_API_URL),
       "process.env.ETHERSCAN_API_URL": JSON.stringify(process.env.ETHERSCAN_API_URL),
       "process.env.ETHERSCAN_API_KEY": JSON.stringify(process.env.ETHERSCAN_API_KEY),
+      "process.env.BITQUERY_API_URL": JSON.stringify(process.env.BITQUERY_API_URL),
+      "process.env.BITQUERY_API_KEY": JSON.stringify(process.env.BITQUERY_API_KEY),
+      "process.env.STREAM_BITQUERY_API_KEY": JSON.stringify(process.env.STREAM_BITQUERY_API_KEY),
     }),
   ].filter(Boolean),
 };

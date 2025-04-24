@@ -28,7 +28,7 @@ export const H: React.FC<HProps> = ({
 };
 
 interface PProps extends HTMLAttributes<HTMLParagraphElement> {
-  size?: "sm" | "base" | "lg";
+  size?: "xs" | "sm" | "base" | "lg";
   color?: Color;
   className?: string;
   children: ReactNode;

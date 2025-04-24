@@ -2,9 +2,11 @@ export interface CoinData {
   id: string;
   symbol: string;
   name: string;
-  current_price: number;
   market_data: {
     ath: {
+      usd: number;
+    };
+    current_price: {
       usd: number;
     };
     market_cap: {

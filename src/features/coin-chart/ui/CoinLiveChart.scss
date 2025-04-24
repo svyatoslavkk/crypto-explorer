@@ -1,0 +1,76 @@
+.coin-live-chart {
+  max-width: 1024px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__cur {
+    display: flex;
+    gap: 16px;
+    align-items: start;
+    justify-content: space-between;
+
+    &__left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      &__price {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+    }
+
+    &__btns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  &__bars {
+    display: flex;
+    align-items: end;
+    gap: 4px;
+    height: 284px;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      justify-content: end;
+      width: 100%;
+      height: 100%;
+      max-width: 52px;
+
+      &:hover &__bar {
+        background-color: var(--color-primary);
+      }
+
+      &:hover ~ &__label,
+      &:hover &__label {
+        opacity: 1;
+      }
+
+      &__bar {
+        width: 100%;
+        background-color: var(--bg-dark-fortiary);
+        border-radius: 4px;
+        align-self: stretch;
+        transition: background-color 0.3s ease;
+      }
+
+      &__label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transform: rotate(-12deg);
+        transition: color 0.3s ease;
+        opacity: 0.5;
+      }
+    }
+  }
+}
