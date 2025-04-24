@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
 import CoinDetails from "../../../widgets/coin_details/ui/CoinDetails";
 import "./CoinPage.scss";
-import { AssetSearchDropdownWrapper, CoinLiveChart } from "../../../features";
-import GasPriceTracker from "../../../widgets/gas_price_tracker/ui/GasPriceTracker";
+import { LatestBlocks } from "../../../widgets";
 
 const CoinPage = () => {
   const { coinId } = useParams();
@@ -13,9 +12,7 @@ const CoinPage = () => {
     <div className="coin__page">
       <div className="coin__page__container">
         <CoinDetails coinId={coinId} />
-        <AssetSearchDropdownWrapper />
-        <GasPriceTracker />
-        <CoinLiveChart coinId={coinId} />
+        <LatestBlocks />
       </div>
     </div>
   );

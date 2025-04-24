@@ -82,6 +82,7 @@ module.exports = {
       "process.env.BITQUERY_API_URL": JSON.stringify(process.env.BITQUERY_API_URL),
       "process.env.BITQUERY_API_KEY": JSON.stringify(process.env.BITQUERY_API_KEY),
       "process.env.STREAM_BITQUERY_API_KEY": JSON.stringify(process.env.STREAM_BITQUERY_API_KEY),
+      "process.env.INFURA_API_KEY": JSON.stringify(process.env.INFURA_API_KEY),
     }),
   ].filter(Boolean),
 };
