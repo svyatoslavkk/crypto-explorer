@@ -1,0 +1,72 @@
+.button {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  color: white;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.filled-default {
+  background-color: var(--bg-dark-tertiary);
+}
+
+.filled-primary {
+  background-color: var(--color-primary);
+}
+
+.filled-secondary {
+  background-color: var(--color-secondary);
+}
+
+.filled-success {
+  background-color: var(--color-success);
+}
+
+.filled-danger {
+  background-color: var(--color-danger);
+}
+
+.outlined-default {
+  background-color: transparent;
+  border: 1px solid var(--bg-dark-tertiary);
+}
+
+.outlined-primary {
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+}
+
+.outlined-secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-secondary);
+}
+
+.outlined-success {
+  background-color: transparent;
+  border: 1px solid var(--color-success);
+}
+
+.outlined-danger {
+  background-color: transparent;
+  border: 1px solid var(--color-danger);
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import CoinDetails from "../../../widgets/coin_details/ui/CoinDetails";
+import "./CoinPage.scss";
+import { AssetSearchDropdownWrapper } from "../../../features";
 
 const CoinPage = () => {
   const { coinId } = useParams();
@@ -8,7 +10,10 @@ const CoinPage = () => {
 
   return (
     <div className="coin__page">
-      <CoinDetails coinId={coinId} />
+      <div className="coin__page__container">
+        <CoinDetails coinId={coinId} />
+        <AssetSearchDropdownWrapper />
+      </div>
     </div>
   );
 };
