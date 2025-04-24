@@ -77,6 +77,8 @@ module.exports = {
     isDevelopment && new ReactRefreshWebpackPlugin(),
     new webpack.DefinePlugin({
       "process.env.COIN_GECKO_API_URL": JSON.stringify(process.env.COIN_GECKO_API_URL),
+      "process.env.ETHERSCAN_API_URL": JSON.stringify(process.env.ETHERSCAN_API_URL),
+      "process.env.ETHERSCAN_API_KEY": JSON.stringify(process.env.ETHERSCAN_API_KEY),
     }),
   ].filter(Boolean),
 };
