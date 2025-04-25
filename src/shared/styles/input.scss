@@ -14,6 +14,14 @@
     box-shadow: none;
   }
 
+  &--left {
+    padding-left: 4px;
+  }
+
+  &--right {
+    padding-right: 4px;
+  }
+
   &__left,
   &__right {
     display: flex;
@@ -27,7 +35,7 @@
     outline: none;
     color: var(--text-primary);
     font-size: 1rem;
-    padding: 8px 4px;
+    font-family: "Space Mono", monospace;
 
     &::placeholder {
       color: #777;
