@@ -4,7 +4,7 @@ import "./CoinPage.scss";
 import { InputWallet } from "../../../features";
 import GasPriceTracker from "../../../widgets/gas_price_tracker/ui/GasPriceTracker";
 import TxsSection from "../../../features/txs_section/ui/TxsSection";
-import { LatestBlocks } from "../../../widgets";
+import { LatestBlocks, TxTooltip } from "../../../widgets";
 
 const CoinPage = () => {
   const { coinId } = useParams();
@@ -21,6 +21,7 @@ const CoinPage = () => {
           <TxsSection />
         </div>
         <GasPriceTracker />
+        <TxTooltip />
       </div>
     </div>
   );
