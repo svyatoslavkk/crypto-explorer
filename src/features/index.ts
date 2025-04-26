@@ -1,3 +1,4 @@
-export * from "./select-asset";
-export * from "./coin-chart";
-export * from "./input-wallet";
+export * from "./select_asset";
+export * from "./coin_chart";
+export * from "./input_wallet";
+export * from "./txs_section";

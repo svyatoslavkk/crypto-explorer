@@ -1,0 +1,18 @@
+@use "../../../styles/mixins" as *;
+
+.txs-section {
+  @include flex-column(16px);
+  width: 100%;
+
+  &__header {
+    @include flex-center-between(8px);
+  }
+
+  &__list {
+    @include flex-column(16px);
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+}

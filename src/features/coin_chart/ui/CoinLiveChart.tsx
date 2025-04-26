@@ -1,5 +1,5 @@
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { Button, Chip, Container, H, P } from "../../../shared";
+import { Button, Chip, Column, Container, H, P, Row } from "../../../shared";
 import { useCoinDetails } from "../../../widgets/coin_details/model/use_coin_details";
 import { useLivePriceTracker } from "../model/use_live_price_tracker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,9 +14,9 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
   return (
     <Container color="default" className="coin-live-chart">
       <div className="coin-live-chart__cur">
-        <div className="coin-live-chart__cur__left">
+        <Column gap={8} className="coin-live-chart__cur__left">
           <P size="base">Price history</P>
-          <div className="coin-live-chart__cur__left__price">
+          <Row gap={8}>
             <H level={2}>${coinData.market_data.current_price.usd.toFixed(2)}</H>
             <Chip
               icon={
@@ -28,9 +28,9 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
               }
               label={`${coinData?.market_data.price_change_percentage_24h.toFixed(2) || "0.00"}%`}
             />
-          </div>
-        </div>
-        <div className="coin-live-chart__cur__btns">
+          </Row>
+        </Column>
+        <Row gap={8}>
           <Button
             color={days === 7 ? "primary" : "default"}
             variant="filled"
@@ -52,7 +52,7 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
           >
             30D
           </Button>
-        </div>
+        </Row>
       </div>
       <div className="coin-live-chart__bars">
         {prices.map(({ price, date }, idx) => (

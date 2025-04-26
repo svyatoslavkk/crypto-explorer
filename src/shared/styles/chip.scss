@@ -1,3 +1,5 @@
+@use "../../styles/mixins" as *;
+
 .chip {
   display: inline-flex;
   align-items: end;
@@ -10,9 +12,8 @@
   cursor: default;
 
   &__icon {
+    @include flex-center(0px);
     margin-right: 6px;
-    display: flex;
-    align-items: center;
   }
 
   &__label {

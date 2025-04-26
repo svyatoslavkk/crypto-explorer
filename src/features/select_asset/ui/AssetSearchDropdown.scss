@@ -1,3 +1,5 @@
+@use "../../../styles/mixins" as *;
+
 .asset-search-dropdown {
   background-color: var(--bg-dark-secondary);
   border-radius: 24px;
@@ -14,15 +16,12 @@
   }
 
   &__btns {
+    @include flex-center(8px);
     padding: 16px 24px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
   }
 
   &__results {
-    display: flex;
-    flex-direction: column;
+    @include flex-column(0px);
     max-height: 320px;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -38,11 +37,8 @@
     }
 
     &__item {
+      @include flex-center-between(8px);
       padding: 12px 24px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      justify-content: space-between;
 
       &.active {
         background-color: rgba(70, 70, 70, 0.33);
@@ -50,9 +46,7 @@
       }
 
       &__left {
-        display: flex;
-        gap: 8px;
-        align-items: center;
+        @include flex-center(8px);
 
         &__img {
           border-radius: 50%;
@@ -62,37 +56,26 @@
       }
 
       &__right {
-        display: flex;
-        gap: 8px;
-        align-items: center;
+        @include flex-center(8px);
       }
     }
   }
 
   &__keys {
+    @include flex-center-between(8px);
     padding: 16px 24px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
 
     &__nav {
-      display: flex;
-      gap: 8px;
-      align-items: center;
+      @include flex-center(8px);
     }
 
     &__esc {
-      display: flex;
-      gap: 8px;
-      align-items: center;
+      @include flex-center(8px);
     }
 
     &__enter {
-      display: flex;
-      gap: 8px;
-      align-items: center;
+      @include flex-center(8px);
 
       &__icon {
         transform: rotate(90deg);

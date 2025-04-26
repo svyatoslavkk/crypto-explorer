@@ -1,33 +1,15 @@
+@use "../../../styles/mixins" as *;
+
 .coin-live-chart {
+  @include flex-column(16px);
   max-width: 1024px;
   width: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 
   &__cur {
     display: flex;
     gap: 16px;
     align-items: start;
     justify-content: space-between;
-
-    &__left {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-
-      &__price {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-    }
-
-    &__btns {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
   }
 
   &__bars {
@@ -37,9 +19,7 @@
     height: 284px;
 
     &__item {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      @include flex-column(8px);
       align-items: center;
       justify-content: end;
       width: 100%;

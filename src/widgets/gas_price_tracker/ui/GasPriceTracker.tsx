@@ -5,6 +5,8 @@ import "./GasPriceTracker.scss";
 import { useGasPriceTracker } from "../model/use_gas_price_tracker";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { SpeedType } from "../model/types";
+import Row from "../../../shared/ui/row";
+import Column from "../../../shared/ui/column";
 
 const GasPriceTracker = () => {
   const { selectedSpeed, setSelectedSpeed, gwei, usdEstimate, timeEstimate, isLoading, isError } =
@@ -19,32 +21,33 @@ const GasPriceTracker = () => {
 
   return (
     <Container className="gas-price-tracker">
-      <div className="gas-price-tracker__info">
+      <Column gap={16} className="gas-price-tracker__info">
         <H level={4}>Gas Price Tracker</H>
-        <div className="gas-price-tracker__info__value">
-          <div className="gas-price-tracker__info__value__price">
+        <Column gap={4}>
+          <Row>
             <H level={2}>${usdEstimate}</H>
             {isLoading && <Spinner size="s" />}
-          </div>
+          </Row>
           <P size="sm" color="secondary">
             ≈{gwei} Gwei per transaction / {timeEstimate}s
           </P>
-        </div>
-      </div>
-      <div className="gas-price-tracker__btns">
+        </Column>
+      </Column>
+      <Column gap={4}>
         {speeds.map(({ label, icon }) => (
           <Button
             key={label}
             color={selectedSpeed === label ? "primary" : "default"}
             onClick={() => setSelectedSpeed(label)}
+            className="gas-price-tracker__btns__button"
           >
-            <div className="gas-price-tracker__btns__btn">
+            <Row>
               <FontAwesomeIcon icon={icon} className="gas-price-tracker__btns__btn__icon" />
               <P size="sm">{label}</P>
-            </div>
+            </Row>
           </Button>
         ))}
-      </div>
+      </Column>
     </Container>
   );
 };

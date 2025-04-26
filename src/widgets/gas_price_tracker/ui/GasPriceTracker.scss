@@ -1,40 +1,20 @@
+@use "../../../styles/mixins" as *;
+
 .gas-price-tracker {
-  display: flex;
-  gap: 32px;
-  align-items: stretch;
-  justify-content: space-between;
+  @include flex-stretch-between(32px);
   width: fit-content;
 
   &__info {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
     justify-content: space-between;
     flex: 1;
-
-    &__value {
-      display: flex;
-      gap: 4px;
-      flex-direction: column;
-
-      &__price {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-    }
   }
 
   &__btns {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    &__button {
+      justify-content: flex-start;
+    }
 
     &__btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
       &__icon {
         width: 16px;
       }

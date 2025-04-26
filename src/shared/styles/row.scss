@@ -1,0 +1,25 @@
+@use "../../styles/mixins" as *;
+
+.flex-row {
+  @include flex-center(8px);
+
+  &--gap-0 {
+    @include flex-center(0px);
+  }
+
+  &--gap-4 {
+    @include flex-center(4px);
+  }
+
+  &--gap-8 {
+    @include flex-center(8px);
+  }
+
+  &--gap-16 {
+    @include flex-center(16px);
+  }
+
+  &--gap-32 {
+    @include flex-center(32px);
+  }
+}

@@ -1,4 +1,4 @@
-import { Chip, formatAmount, H, P, StatItem } from "../../../shared";
+import { Chip, Column, formatAmount, H, P, Row, StatItem } from "../../../shared";
 import { useCoinDetails } from "../model/use_coin_details";
 import "./CoinDetails.scss";
 
@@ -16,20 +16,20 @@ const CoinDetails = ({ coinId }: CoinDetailsProps) => {
 
   return (
     <section className="coin__details">
-      <div className="coin__details__main">
-        <div className="coin__details__main__avatar">
+      <Row gap={8}>
+        <Row gap={0} className="coin__details__main__avatar">
           <img src={coinData.image.large} alt={`${coinData.name}'s image`} />
-        </div>
-        <div className="coin__details__main__text">
+        </Row>
+        <Column gap={0}>
           <P color="secondary" size="sm">
             Explores
           </P>
-          <div className="coin__details__main__text__coin-name">
+          <Row>
             <H level={4}>{coinData.name}</H>
             <Chip color="primary" label={`#${coinData.market_cap_rank}`} />
-          </div>
-        </div>
-      </div>
+          </Row>
+        </Column>
+      </Row>
       <StatItem
         label="24h change"
         value={`${coinData.market_data.price_change_percentage_24h.toFixed(2)}%`}

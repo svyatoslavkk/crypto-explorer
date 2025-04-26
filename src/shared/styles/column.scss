@@ -1,0 +1,25 @@
+@use "../../styles/mixins" as *;
+
+.flex-column {
+  @include flex-column(8px);
+
+  &--gap-0 {
+    @include flex-column(0px);
+  }
+
+  &--gap-4 {
+    @include flex-column(4px);
+  }
+
+  &--gap-8 {
+    @include flex-column(8px);
+  }
+
+  &--gap-16 {
+    @include flex-column(16px);
+  }
+
+  &--gap-32 {
+    @include flex-column(32px);
+  }
+}

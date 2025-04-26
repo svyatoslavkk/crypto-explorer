@@ -1,11 +1,11 @@
+@use "../../styles/mixins" as *;
+
 .custom-input {
-  display: flex;
-  align-items: center;
+  @include flex-center(8px);
   background-color: var(--bg-dark-secondary);
   border: 1px solid var(--color-dark-accent);
   border-radius: 24px;
   padding: 4px 12px;
-  gap: 8px;
   transition: border-color 0.2s ease;
   outline: none;
 
@@ -24,8 +24,7 @@
 
   &__left,
   &__right {
-    display: flex;
-    align-items: center;
+    @include flex-center(0px);
   }
 
   &__field {

@@ -1,7 +1,7 @@
+@use "../../styles/mixins" as *;
+
 .button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center-center(0px);
   font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: normal;

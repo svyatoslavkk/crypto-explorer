@@ -1,14 +1,14 @@
+@use "../../../styles/mixins" as *;
+
 .copy-button-wrapper {
   position: relative;
   display: inline-block;
 }
 
 .copy-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  @include flex-center(6px);
   border-radius: 12px;
-  padding: 6px 12px;
+  padding: 6px 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   position: relative;

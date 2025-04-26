@@ -1,13 +1,19 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
-import { isValidETHAddress } from "../../../shared";
+import { EthTx, isValidETHAddress } from "../../../shared";
 import { useQuery } from "@tanstack/react-query";
 
 const API_KEY = process.env.ETHERSCAN_API_KEY;
 
-const fetchTransactions = async (address: string) => {
+interface EtherscanResponse {
+  status: string;
+  message: string;
+  result: EthTx[];
+}
+
+const fetchTransactions = async (address: string): Promise<EtherscanResponse> => {
   const res = await fetch(
-    `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${address}&apikey=${API_KEY}`
+    `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${address}&page=1&offset=8&sort=desc&apikey=${API_KEY}`
   );
   if (!res.ok) throw new Error("Failed to fetch transactions");
   return res.json();

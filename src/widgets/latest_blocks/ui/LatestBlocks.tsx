@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Container, CopyButton, formatTimeAgo, H, P } from "../../../shared";
+import { Button, Container, CopyButton, formatTimeAgo, H, P, Row } from "../../../shared";
 import { useLatestBlocks } from "../model/use_latest_blocks";
 import { faCube } from "@fortawesome/free-solid-svg-icons";
 import "./LatestBlocks.scss";
@@ -25,15 +25,15 @@ export const LatestBlocks = () => {
                   {formatTimeAgo(block.timestamp)}
                 </P>
               </div>
-              <div className="latest-blocks__list__item__info__txs">
+              <Row gap={4}>
                 <P size="sm" color="secondary">
                   Transactions:
                 </P>
                 <P size="sm" color="primary">
                   {block.transactions.length}
                 </P>
-              </div>
-              <div className="latest-blocks__list__item__info__hash">
+              </Row>
+              <Row gap={4}>
                 <P size="sm" color="secondary">
                   Hash:
                 </P>
@@ -41,7 +41,7 @@ export const LatestBlocks = () => {
                   {block.hash?.slice(0, 25)}...
                 </P>
                 <CopyButton size="sm" text={block?.hash || ""} />
-              </div>
+              </Row>
               {index !== blocks.length - 1 && (
                 <div className="latest-blocks__list__item__info__divider" />
               )}

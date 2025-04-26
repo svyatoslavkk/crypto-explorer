@@ -1,0 +1,28 @@
+@use "../../../styles/mixins" as *;
+
+.tx-item {
+  @include flex-center-between(8px);
+  width: 100%;
+
+  &__first {
+    &__icon {
+      @include flex-center(0px);
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+      background-color: var(--bg-dark-tertiary);
+      color: var(--color-blue-light);
+      border-radius: 50%;
+    }
+  }
+
+  &__second {
+    &__to {
+      &__icon {
+        transform: rotate(90deg);
+        margin-right: 8px;
+        font-size: 14px;
+      }
+    }
+  }
+}

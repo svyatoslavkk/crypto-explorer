@@ -1,0 +1,32 @@
+@mixin flex-center($gap: 8px) {
+  display: flex;
+  gap: $gap;
+  align-items: center;
+}
+
+@mixin flex-center-center($gap: 8px) {
+  display: flex;
+  gap: $gap;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-center-between($gap: 8px) {
+  display: flex;
+  gap: $gap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column($gap: 8px) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@mixin flex-stretch-between($gap: 8px) {
+  display: flex;
+  gap: $gap;
+  align-items: stretch;
+  justify-content: space-between;
+}
