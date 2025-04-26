@@ -1,10 +1,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Column, Container, CopyButton, H, P, Row } from "../../../shared";
+import {
+  Column,
+  Container,
+  CopyButton,
+  EthTx,
+  formatFullDate,
+  formatTimeAgo,
+  H,
+  HorDivider,
+  P,
+  ProgressBar,
+  Row,
+} from "../../../shared";
 import "./TxTooltip.scss";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { faEthereum } from "@fortawesome/free-brands-svg-icons";
 
-export const TxTooltip = () => {
+export const TxTooltip = ({ tx }: { tx: EthTx }) => {
+  const formattedDate = formatFullDate(+tx.timeStamp);
+
+  const transactionFeeEth = (Number(tx.gasPrice) * Number(tx.gasUsed)) / 1e18;
+  const gasUsagePercentage = tx.gas && tx.gasUsed ? Math.round((+tx.gasUsed / +tx.gas) * 100) : 0;
+
   return (
     <Container className="tx-tooltip">
       <div className="tx-tooltip__header">
@@ -15,46 +32,48 @@ export const TxTooltip = () => {
       <Column gap={4}>
         <Row gap={8}>
           <H level={4}>Transaction details</H>
-          <FontAwesomeIcon icon={faCheckCircle} className="tx-tooltip__headline__icon" />
+          {tx.isError === "0" && (
+            <FontAwesomeIcon icon={faCheckCircle} className="tx-tooltip__headline__icon" />
+          )}
         </Row>
         <P size="sm" color="secondary">
-          Mar 07 2024 00:16:47 AM
+          {formattedDate}
         </P>
       </Column>
-      <div className="tx-tooltip__divider" />
+      <HorDivider />
       <Column gap={4}>
         <P color="secondary" size="sm">
           Transaction fee
         </P>
         <div className="tx-tooltip__fee-value">
           <P color="primary" size="sm">
-            0.0015684 ETH
+            {transactionFeeEth.toFixed(6)} ETH
           </P>
           <P color="primary" size="sm">
-            {"($7.62)"}
+            {" "}
           </P>
         </div>
       </Column>
-      <div className="tx-tooltip__divider" />
+      <HorDivider />
       <Column gap={4}>
         <P color="secondary" size="sm">
           Transaction hash
         </P>
         <Row gap={4}>
           <P color="primary" size="sm">
-            0x32029f61...4684b6df
+            {`${tx.hash.slice(0, 8)}...${tx.hash.slice(-8)}`}
           </P>
-          <CopyButton size="sm" text="0x32029f61...4684b6df" />
+          <CopyButton size="sm" text={tx.hash} />
         </Row>
       </Column>
-      <div className="tx-tooltip__divider" />
+      <HorDivider />
       <Column gap={4}>
         <div className="tx-tooltip__block">
           <P color="secondary" size="sm">
             Block
           </P>
           <P color="primary" size="sm">
-            16168186
+            {tx.blockNumber}
           </P>
         </div>
         <div className="tx-tooltip__age">
@@ -62,27 +81,28 @@ export const TxTooltip = () => {
             Age
           </P>
           <P color="primary" size="sm">
-            9m ago
+            {formatTimeAgo(+tx.timeStamp)}
           </P>
         </div>
       </Column>
-      <div className="tx-tooltip__divider" />
+      <HorDivider />
       <Column gap={4}>
         <div className="tx-tooltip__gas-price">
           <P color="secondary" size="sm">
             Gas price
           </P>
           <P color="primary" size="sm">
-            95.6691866
+            {(+tx.gasPrice / 1e9).toFixed(2)} Gwei
           </P>
         </div>
         <div className="tx-tooltip__gas-usage">
           <P color="secondary" size="sm">
             Gas usage
           </P>
-          <Row gap={4}>
+          <Row gap={8}>
+            <ProgressBar percentage={gasUsagePercentage} width={100} height={6} />
             <P color="primary" size="sm">
-              82%
+              {gasUsagePercentage}%
             </P>
           </Row>
         </div>

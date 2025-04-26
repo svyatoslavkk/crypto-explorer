@@ -3,14 +3,8 @@
 .tx-tooltip {
   @include flex-column(16px);
   border: 1px solid var(--bg-dark-fortiary);
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.5);
   width: fit-content;
-
-  &__divider {
-    height: 1px;
-    width: 100%;
-    background-color: var(--bg-dark-fortiary);
-  }
 
   &__header {
     &__icon {

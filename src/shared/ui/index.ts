@@ -2,6 +2,8 @@ export * from "./button";
 export * from "./chip";
 export * from "./column";
 export * from "./container";
+export * from "./hor-divier";
+export * from "./progress-bar";
 export * from "./row";
 export * from "./input";
 export * from "./spinner";

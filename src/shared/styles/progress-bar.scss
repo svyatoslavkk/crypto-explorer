@@ -1,0 +1,13 @@
+.progress-bar {
+  border-radius: 999px;
+  background-color: var(--bg-dark-tertiary);
+  overflow: hidden;
+  position: relative;
+
+  &__filled {
+    border-radius: 999px;
+    background-color: var(--color-success);
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+}
