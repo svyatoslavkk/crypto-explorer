@@ -6,7 +6,6 @@ import TxItem from "./TxItem";
 const TxsSection = () => {
   const { data, isLoading, error } = useFetchTransactions();
   const txs = data?.result;
-
   if (!data) return null;
 
   return (

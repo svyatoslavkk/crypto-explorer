@@ -13,16 +13,10 @@ export const useLivePriceTracker = (coinId: string) => {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const res = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}&interval=daily`
-        );
+        const res = await fetch(`http://localhost:5000/api/historical-prices/${coinId}/${days}`);
         const data = await res.json();
-        const dailyPrices = data.prices.map(([timestamp, price]: [number, number]) => ({
-          date: new Date(timestamp),
-          price,
-        }));
-
-        setPrices(dailyPrices.slice(0, -1));
+        console.log("data", data);
+        setPrices(data);
       } catch (error) {
         console.error("Ошибка получения исторических цен:", error);
       } finally {
@@ -42,9 +36,14 @@ export const useLivePriceTracker = (coinId: string) => {
     return Math.max(5, normalized);
   };
 
-  const formatDate = (date: Date) => {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const formatDate = (date: string | Date) => {
+    const dateObj = typeof date === "string" ? new Date(date) : date;
+
+    if (!(dateObj instanceof Date) || isNaN(dateObj.getTime())) {
+      return "Invalid date";
+    }
+
+    const day = dateObj.getDate().toString().padStart(2, "0");
     return `${day}`;
   };
 

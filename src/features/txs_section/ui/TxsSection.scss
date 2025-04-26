@@ -10,7 +10,6 @@
 
   &__list {
     @include flex-column(16px);
-    justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;

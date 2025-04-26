@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import CoinDetails from "../../../widgets/coin_details/ui/CoinDetails";
 import "./CoinPage.scss";
 import { InputWallet } from "../../../features";
+import GasPriceTracker from "../../../widgets/gas_price_tracker/ui/GasPriceTracker";
 import TxsSection from "../../../features/txs_section/ui/TxsSection";
 import { LatestBlocks } from "../../../widgets";
-import GasPriceTracker from "../../../widgets/gas_price_tracker/ui/GasPriceTracker";
 
 const CoinPage = () => {
   const { coinId } = useParams();

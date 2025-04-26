@@ -3,8 +3,6 @@ import { RootState } from "../../../app/store";
 import { EthTx, isValidETHAddress } from "../../../shared";
 import { useQuery } from "@tanstack/react-query";
 
-const API_KEY = process.env.ETHERSCAN_API_KEY;
-
 interface EtherscanResponse {
   status: string;
   message: string;
@@ -12,9 +10,7 @@ interface EtherscanResponse {
 }
 
 const fetchTransactions = async (address: string): Promise<EtherscanResponse> => {
-  const res = await fetch(
-    `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${address}&page=1&offset=8&sort=desc&apikey=${API_KEY}`
-  );
+  const res = await fetch(`http://localhost:5000/api/sepoliaTxs/${address}`);
   if (!res.ok) throw new Error("Failed to fetch transactions");
   return res.json();
 };

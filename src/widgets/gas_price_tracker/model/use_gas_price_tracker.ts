@@ -13,8 +13,9 @@ export const useGasPriceTracker = () => {
   } = useQuery({
     queryKey: ["gasData"],
     queryFn: fetchGasData,
-    refetchInterval: 60_000,
+    refetchInterval: 1000 * 60,
   });
+  console.log("gasData", gasData);
 
   const gwei = gasData[selectedSpeed] ?? 0;
   const usdEstimate = (gwei * 0.08).toFixed(2);
