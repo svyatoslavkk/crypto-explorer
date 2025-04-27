@@ -1,1 +1,2 @@
-export * from "./coin";
+export * from "./dashboard";
+export * from "./txs";

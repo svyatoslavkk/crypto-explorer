@@ -9,4 +9,6 @@ export * from "./input";
 export * from "./spinner";
 export * from "./typography";
 export * from "./copy_button";
+export * from "./header";
+export * from "./nav_tabs";
 export * from "./stat_item";

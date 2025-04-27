@@ -15,7 +15,6 @@ export const useLivePriceTracker = (coinId: string) => {
       try {
         const res = await fetch(`http://localhost:5000/api/historical-prices/${coinId}/${days}`);
         const data = await res.json();
-        console.log("data", data);
         setPrices(data);
       } catch (error) {
         console.error("Ошибка получения исторических цен:", error);

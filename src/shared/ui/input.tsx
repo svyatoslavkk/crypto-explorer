@@ -9,11 +9,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   right?: ReactNode;
   variant?: Variant;
   className?: string;
+  maxWidth?: string;
 }
 
 export const Input = forwardRef(
   (
-    { left, right, variant = "md", className = "", ...props }: InputProps,
+    { left, right, variant = "md", className = "", maxWidth, ...props }: InputProps,
     ref: Ref<HTMLInputElement>
   ) => {
     return (
@@ -24,6 +25,7 @@ export const Input = forwardRef(
           `${right ? "custom-input--right" : ""}`,
           className
         )}
+        style={{ maxWidth }}
       >
         {left && <div className="custom-input__left">{left}</div>}
         <input ref={ref} className="custom-input__field" {...props} />

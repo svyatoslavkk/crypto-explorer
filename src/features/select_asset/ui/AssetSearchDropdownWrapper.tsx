@@ -27,10 +27,11 @@ export const AssetSearchDropdownWrapper = () => {
   return (
     <div className="asset-search">
       <Input
-        left={<FontAwesomeIcon icon={faEthereum} />}
-        right={<FontAwesomeIcon icon={faMagnifyingGlass} />}
+        left={<FontAwesomeIcon icon={faEthereum} style={{ marginLeft: 6 }} />}
+        right={<FontAwesomeIcon icon={faMagnifyingGlass} style={{ marginRight: 6 }} />}
         placeholder="Search assets..."
         ref={inputRef}
+        maxWidth="650px"
       />
       {inputRef?.current?.value && results && (
         <AssetSearchDropdown

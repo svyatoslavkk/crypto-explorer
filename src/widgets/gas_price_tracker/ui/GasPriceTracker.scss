@@ -2,11 +2,16 @@
 
 .gas-price-tracker {
   @include flex-stretch-between(32px);
-  width: fit-content;
 
   &__info {
     justify-content: space-between;
     flex: 1;
+
+    &__desc {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   &__btns {
@@ -17,6 +22,12 @@
     &__btn {
       &__icon {
         width: 16px;
+      }
+
+      &__label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

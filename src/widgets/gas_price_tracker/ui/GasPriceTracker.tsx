@@ -28,7 +28,7 @@ const GasPriceTracker = () => {
             <H level={2}>${usdEstimate}</H>
             {isLoading && <Spinner size="s" />}
           </Row>
-          <P size="sm" color="secondary">
+          <P size="sm" color="secondary" className="gas-price-tracker__info__desc">
             ≈{gwei} Gwei per transaction / {timeEstimate}s
           </P>
         </Column>
@@ -43,7 +43,9 @@ const GasPriceTracker = () => {
           >
             <Row>
               <FontAwesomeIcon icon={icon} className="gas-price-tracker__btns__btn__icon" />
-              <P size="sm">{label}</P>
+              <P size="sm" className="gas-price-tracker__btns__btn__label">
+                {label}
+              </P>
             </Row>
           </Button>
         ))}
