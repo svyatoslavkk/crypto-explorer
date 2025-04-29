@@ -1,15 +1,21 @@
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { Button, Chip, Column, Container, H, P, Row } from "../../../shared";
+import { Button, Chip, Column, Container, H, P, Row, useTokenPriceLive } from "../../../shared";
 import { useCoinDetails } from "../../../widgets/coin_details/model/use_coin_details";
 import { useLivePriceTracker } from "../model/use_live_price_tracker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CoinLiveChart.scss";
+import { useChartPath } from "../hooks/use_chart_path";
 
 export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
   const { prices, days, setDays, loading, getHeight, formatDate } = useLivePriceTracker(coinId);
   const { coinData, error, loading: coinDetailsLoading } = useCoinDetails(coinId);
+  const price = useTokenPriceLive(coinData?.symbol);
   if (loading) return <div>Загрузка...</div>;
   if (!coinData) return null;
+
+  const width = 1000;
+  const height = 96;
+  const pathData = useChartPath(prices, height, getHeight);
 
   return (
     <Container color="default" className="coin-live-chart">
@@ -17,7 +23,7 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
         <Column gap={8} className="coin-live-chart__cur__left">
           <P size="base">Price history</P>
           <Row gap={8}>
-            <H level={2}>${coinData.market_data.current_price.usd.toFixed(2)}</H>
+            <H level={2}>${price ?? coinData.market_data.current_price.usd.toFixed(2)}</H>
             <Chip
               icon={
                 coinData?.market_data.price_change_percentage_24h > 0 ? (
@@ -26,7 +32,7 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
                   <FontAwesomeIcon icon={faCaretDown} size="sm" />
                 )
               }
-              label={`${coinData?.market_data.price_change_percentage_24h.toFixed(2) || "0.00"}%`}
+              label={`${coinData?.market_data.price_change_percentage_30d.toFixed(2) || "0.00"}%`}
             />
           </Row>
         </Column>
@@ -34,6 +40,7 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
           <Button
             color={days === 7 ? "primary" : "default"}
             variant="filled"
+            disabled
             onClick={() => setDays(7)}
           >
             7D
@@ -41,6 +48,7 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
           <Button
             color={days === 14 ? "primary" : "default"}
             variant="filled"
+            disabled
             onClick={() => setDays(14)}
           >
             14D
@@ -48,19 +56,35 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
           <Button
             color={days === 30 ? "primary" : "default"}
             variant="filled"
+            disabled
             onClick={() => setDays(30)}
           >
             30D
           </Button>
         </Row>
       </div>
+      <div style={{ width: "100%" }}>
+        <svg
+          width="100%"
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d={pathData}
+            fill="none"
+            stroke="orange"
+            strokeWidth="5"
+            strokeLinecap="round"
+            style={{
+              filter: "drop-shadow(0px 0px 5px orange)",
+            }}
+          />
+        </svg>
+      </div>
       <div className="coin-live-chart__bars">
         {prices.map(({ price, date }, idx) => (
           <div key={idx} className="coin-live-chart__bars__item" title={`$${price.toFixed(2)}`}>
-            <div
-              className="coin-live-chart__bars__item__bar"
-              style={{ height: `${getHeight(price)}%` }}
-            />
             <P color="secondary" size="xs" className="coin-live-chart__bars__item__label">
               {formatDate(date)}
             </P>

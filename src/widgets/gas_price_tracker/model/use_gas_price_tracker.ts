@@ -13,7 +13,7 @@ export const useGasPriceTracker = () => {
   } = useQuery({
     queryKey: ["gasData"],
     queryFn: fetchGasData,
-    refetchInterval: 1000 * 60,
+    refetchInterval: 1000 * 120,
   });
 
   const gwei = gasData[selectedSpeed] ?? 0;

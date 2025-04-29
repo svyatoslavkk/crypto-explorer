@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 type PricePoint = {
-  date: Date;
+  date: string | Date;
   price: number;
 };
 

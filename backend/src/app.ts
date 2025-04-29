@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { createServer } from "http";
 import blocks from "./routes/blocks";
 import sepoliaTxs from "./routes/sepoliaTxs";
 import gas from "./routes/gas";
@@ -13,13 +14,16 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-console.log("ETHERSCAN_API_KEY:", process.env.ETHERSCAN_API_KEY);
 app.use("/api", blocks);
 app.use("/api", sepoliaTxs);
 app.use("/api", gas);
 app.use("/api", coins);
 app.use("/api", historicalPrices);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const server = createServer(app);
+
+// setupWebSocket(server);
+
+server.listen(PORT, () => {
+  console.log(`HTTP + WebSocket Server is running on port ${PORT}`);
 });

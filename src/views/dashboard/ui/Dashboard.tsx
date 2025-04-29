@@ -1,11 +1,9 @@
 import { useParams } from "react-router-dom";
-import CoinDetails from "../../../widgets/coin_details/ui/CoinDetails";
 import { Row } from "../../../shared";
-import { LatestBlocks } from "../../../widgets";
-import TxsSection from "../../../features/txs_section/ui/TxsSection";
 import "./Dashboard.scss";
-import GasPriceTracker from "../../../widgets/gas_price_tracker/ui/GasPriceTracker";
 import { CoinLiveChart, InputWallet } from "../../../features";
+import GasPriceTracker from "../../../widgets/gas_price_tracker/ui/GasPriceTracker";
+import CoinDetails from "../../../widgets/coin_details/ui/CoinDetails";
 
 const Dashboard = () => {
   const { coinId } = useParams();
@@ -22,10 +20,10 @@ const Dashboard = () => {
         <CoinLiveChart coinId={coinId} />
         <GasPriceTracker />
       </Row>
-      <Row gap={16}>
+      {/* <Row gap={16}>
         <LatestBlocks />
         <TxsSection />
-      </Row>
+      </Row> */}
     </>
   );
 };
