@@ -9,13 +9,20 @@ export const useLivePriceTracker = (coinId: string) => {
   const [prices, setPrices] = useState<PricePoint[]>([]);
   const [days, setDays] = useState<number>(30);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPrices = async () => {
+      setLoading(true);
+      setError(null);
       try {
         const res = await fetch(`http://localhost:5000/api/historical-prices/${coinId}/${days}`);
         const data = await res.json();
-        setPrices(data);
+        if (Array.isArray(data)) {
+          setPrices(data);
+        } else {
+          throw new Error("Некорректный формат данных");
+        }
       } catch (error) {
         console.error("Ошибка получения исторических цен:", error);
       } finally {
@@ -46,5 +53,5 @@ export const useLivePriceTracker = (coinId: string) => {
     return `${day}`;
   };
 
-  return { prices, days, setDays, loading, getHeight, formatDate };
+  return { prices, days, setDays, loading, error, getHeight, formatDate };
 };

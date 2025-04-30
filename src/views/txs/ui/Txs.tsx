@@ -1,80 +1,37 @@
-import { useEffect, useState } from "react";
-import { H } from "../../../shared";
 import "./Txs.scss";
-
-type BlockData = {
-  type: "newBlock";
-  blockNumber: number;
-  transactionsCount: number;
-  timestamp: number;
-};
-
-type TradeData = {
-  type: "newTrade";
-  hash: string;
-  amount: string;
-  from: string;
-  to: string;
-};
-
-type MessageData = BlockData | TradeData;
+import { InputWallet, useInfiniteScroll } from "../../../features";
+import { useFetchTransactions } from "../../../features/input_wallet/model/useFetchTransactions";
+import TxItem from "../../../features/txs_section/ui/TxItem";
+import { Spinner } from "../../../shared";
 
 export const Txs = () => {
-  const [blocks, setBlocks] = useState<BlockData[]>([]);
-  const [trades, setTrades] = useState<TradeData[]>([]);
-  console.log("blocks", blocks);
-  console.log("trades", trades);
-  useEffect(() => {
-    const socket = new WebSocket("ws://localhost:5000"); // Адрес твоего бэкенда
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, error } =
+    useFetchTransactions();
 
-    socket.onmessage = event => {
-      const data: MessageData = JSON.parse(event.data);
-
-      if (data.type === "newBlock") {
-        setBlocks(prev => [data, ...prev.slice(0, 10)]); // последние 10 блоков
-      }
-
-      if (data.type === "newTrade") {
-        setTrades(prev => [data, ...prev.slice(0, 10)]); // последние 10 сделок
-      }
-    };
-
-    socket.onopen = () => {
-      console.log("WebSocket подключен");
-    };
-
-    socket.onclose = () => {
-      console.log("WebSocket отключен");
-    };
-
-    return () => {
-      socket.close();
-    };
-  }, []);
+  const { loaderRef } = useInfiniteScroll(fetchNextPage, hasNextPage, isFetchingNextPage);
 
   return (
     <>
-      <H level={4}>Txs</H>
-      <div>
-        <h2>Последние Блоки</h2>
-        <ul>
-          {blocks.map(block => (
-            <li key={block.blockNumber}>
-              Блок #{block.blockNumber} — Транзакций: {block.transactionsCount} — Время:{" "}
-              {new Date(block.timestamp * 1000).toLocaleTimeString()}
-            </li>
-          ))}
-        </ul>
+      <InputWallet />
+      <div className="txs-container">
+        {isLoading && <Spinner size="m" />}
+        {error && <p>Error loading transactions</p>}
 
-        <h2>Последние Сделки</h2>
-        <ul>
-          {trades.map(trade => (
-            <li key={trade.hash}>
-              Сделка: {trade.hash.slice(0, 10)}... — {trade.amount} ETH — От:{" "}
-              {trade.from.slice(0, 6)}
-            </li>
-          ))}
-        </ul>
+        {data?.pages.map((page, i) => (
+          <div key={i} className="txs-container__list">
+            {page.result.map(tx => (
+              <div className="txs-container__list__item">
+                <TxItem key={tx.hash} tx={tx} />
+              </div>
+            ))}
+          </div>
+        ))}
+
+        {!isLoading && (
+          <div ref={loaderRef} className="loading-trigger">
+            {isFetchingNextPage ? <Spinner size="m" /> : "Scroll to load more"}
+          </div>
+        )}
       </div>
     </>
   );

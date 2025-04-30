@@ -9,9 +9,7 @@ export const useTokenPriceLive = (symbol: string = "eth") => {
     const ws = new WebSocket(url);
     wsRef.current = ws;
 
-    ws.onopen = () => {
-      console.log(`[WebSocket] Connected to ${url}`);
-    };
+    ws.onopen = () => {};
 
     ws.onmessage = event => {
       try {
@@ -29,17 +27,12 @@ export const useTokenPriceLive = (symbol: string = "eth") => {
       }
     };
 
-    ws.onerror = err => {
-      console.error("[WebSocket] Error:", err);
-    };
+    ws.onerror = err => {};
 
-    ws.onclose = event => {
-      console.warn("[WebSocket] Closed:", event.reason);
-    };
+    ws.onclose = event => {};
 
     return () => {
       ws.close();
-      console.log("[WebSocket] Disconnected");
     };
   }, [symbol]);
 

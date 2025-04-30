@@ -7,15 +7,24 @@ import "./CoinLiveChart.scss";
 import { useChartPath } from "../hooks/use_chart_path";
 
 export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
-  const { prices, days, setDays, loading, getHeight, formatDate } = useLivePriceTracker(coinId);
+  const {
+    prices,
+    days,
+    setDays,
+    loading,
+    error: pricesError,
+    getHeight,
+    formatDate,
+  } = useLivePriceTracker(coinId);
   const { coinData, error, loading: coinDetailsLoading } = useCoinDetails(coinId);
   const price = useTokenPriceLive(coinData?.symbol);
   if (loading) return <div>Загрузка...</div>;
+  if (pricesError) return <div>{error}</div>;
   if (!coinData) return null;
 
-  const width = 1000;
+  const width = 664;
   const height = 96;
-  const pathData = useChartPath(prices, height, getHeight);
+  const { linePath, areaPath } = useChartPath(prices, width, height, getHeight);
 
   return (
     <Container color="default" className="coin-live-chart">
@@ -70,8 +79,21 @@ export const CoinLiveChart = ({ coinId }: { coinId: string }) => {
           viewBox={`0 0 ${width} ${height}`}
           xmlns="http://www.w3.org/2000/svg"
         >
+          <defs>
+            <linearGradient id="orange-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="orange" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="orange" stopOpacity="0" />
+            </linearGradient>
+          </defs>
           <path
-            d={pathData}
+            d={areaPath}
+            fill="url(#orange-gradient)"
+            style={{
+              filter: "drop-shadow(0px 0px 5px orange)",
+            }}
+          />
+          <path
+            d={linePath}
             fill="none"
             stroke="orange"
             strokeWidth="5"

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-type BlockInfo = {
+export type BlockInfo = {
   number: number;
   hash: string | null;
   timestamp: number;

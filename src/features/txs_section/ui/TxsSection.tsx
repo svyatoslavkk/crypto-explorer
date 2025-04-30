@@ -1,11 +1,12 @@
-import { Button, Container, H, Spinner } from "../../../shared";
+import { Button, Container, EthTx, H, Spinner } from "../../../shared";
 import "./TxsSection.scss";
 import { useFetchTransactions } from "../../input_wallet/model/useFetchTransactions";
 import TxItem from "./TxItem";
 
 const TxsSection = () => {
   const { data, isLoading, error } = useFetchTransactions();
-  const txs = data?.result;
+
+  const txs: EthTx[] | undefined = data?.pages.flatMap(page => page.result);
   if (!data) return null;
 
   return (

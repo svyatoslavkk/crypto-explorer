@@ -21,7 +21,6 @@ app.use("/api", coins);
 app.use("/api", historicalPrices);
 
 const server = createServer(app);
-
 // setupWebSocket(server);
 
 server.listen(PORT, () => {

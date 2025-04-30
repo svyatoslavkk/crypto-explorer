@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./NavTabs.scss";
 
 export type NavTabId =
@@ -11,31 +11,48 @@ export type NavTabId =
   | "validators"
   | "analytics";
 
-const tabs: { id: NavTabId; label: string }[] = [
-  { id: "dashboard", label: "Dashboard" },
-  { id: "blocks", label: "Blocks" },
-  { id: "transactions", label: "Transactions" },
-  { id: "accounts", label: "Accounts" },
-  { id: "tokens", label: "Tokens" },
-  { id: "nfts", label: "NFTs" },
-  { id: "validators", label: "Validators" },
-  { id: "analytics", label: "Analytics" },
+const tabs: { id: NavTabId; label: string; path: string }[] = [
+  { id: "dashboard", label: "Dashboard", path: "/" },
+  { id: "blocks", label: "Blocks", path: "/blocks" },
+  { id: "transactions", label: "Transactions", path: "/txs" },
+  { id: "accounts", label: "Accounts", path: "/accounts" },
+  { id: "tokens", label: "Tokens", path: "/tokens" },
+  { id: "nfts", label: "NFTs", path: "/nfts" },
+  { id: "validators", label: "Validators", path: "/validators" },
+  { id: "analytics", label: "Analytics", path: "/analytics" },
 ];
 
+const tabPaths = tabs.map(tab => tab.path.split("/")[1]).filter(Boolean);
+
 export const NavTabs = () => {
-  const [activeTab, setActiveTab] = useState<NavTabId>("dashboard");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isDashboardPath = (() => {
+    const match = /^\/([^/]+)$/.exec(location.pathname);
+    if (!match) return false;
+    const firstSegment = match[1];
+    return !tabPaths.includes(firstSegment);
+  })();
+
   return (
     <nav className="nav-tabs">
       <ul className="nav-tabs__list">
-        {tabs.map(tab => (
-          <li
-            key={tab.id}
-            className={`nav-tabs__item ${activeTab === tab.id ? "nav-tabs__item--active" : ""}`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.label}
-          </li>
-        ))}
+        {tabs.map(tab => {
+          const isActive =
+            tab.id === "dashboard" ? isDashboardPath : location.pathname.startsWith(tab.path);
+          return (
+            <li
+              key={tab.id}
+              className={`nav-tabs__item ${isActive ? "nav-tabs__item--active" : ""}`}
+              onClick={() => {
+                if (!isActive) navigate(tab.path);
+              }}
+            >
+              {tab.label}
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

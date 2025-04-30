@@ -1,10 +1,10 @@
 export const useChartPath = (
   prices: { price: number; date: string | Date }[],
+  width: number,
   height: number,
   getHeight: Function
 ) => {
-  const width = 1000;
-  const paddingY = -32;
+  const paddingY = 0;
   const contentHeight = height - paddingY * 2;
   const gap = width / (prices.length - 1);
 
@@ -30,5 +30,9 @@ export const useChartPath = (
     return `${d} T ${lastX},${lastY}`;
   }
 
-  return getSmoothPath(points);
+  const linePath = getSmoothPath(points);
+
+  const areaPath = `${linePath} L ${width},${height} L 0,${height} Z`;
+
+  return { linePath, areaPath };
 };

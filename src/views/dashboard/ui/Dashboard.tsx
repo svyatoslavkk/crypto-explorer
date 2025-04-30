@@ -4,6 +4,8 @@ import "./Dashboard.scss";
 import { CoinLiveChart, InputWallet } from "../../../features";
 import GasPriceTracker from "../../../widgets/gas_price_tracker/ui/GasPriceTracker";
 import CoinDetails from "../../../widgets/coin_details/ui/CoinDetails";
+import { LatestBlocks } from "../../../widgets";
+import TxsSection from "../../../features/txs_section/ui/TxsSection";
 
 const Dashboard = () => {
   const { coinId } = useParams();
@@ -20,10 +22,10 @@ const Dashboard = () => {
         <CoinLiveChart coinId={coinId} />
         <GasPriceTracker />
       </Row>
-      {/* <Row gap={16}>
+      <Row gap={16}>
         <LatestBlocks />
         <TxsSection />
-      </Row> */}
+      </Row>
     </>
   );
 };

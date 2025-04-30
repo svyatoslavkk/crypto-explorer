@@ -4,10 +4,11 @@ const router = Router();
 
 router.get("/sepoliaTxs/:address", async (req, res) => {
   const { address } = req.params;
+  const { page = "1", offset = "8" } = req.query;
 
   try {
     const response = await fetch(
-      `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${address}&page=1&offset=8&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}`
+      `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${address}&page=${page}&offset=${offset}&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}`
     );
     if (!response.ok) throw new Error("Failed to fetch transactions");
 
