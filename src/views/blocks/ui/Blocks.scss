@@ -1,4 +1,8 @@
 .blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   &__list {
     display: flex;
     flex-direction: row;
@@ -10,5 +14,10 @@
       border-radius: 16px;
       padding: 10px;
     }
+  }
+
+  &__loader {
+    display: flex;
+    justify-content: center;
   }
 }

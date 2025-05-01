@@ -1,10 +1,13 @@
-import { Button, Container, H } from "../../../shared";
+import { Button, Container, H, Spinner } from "../../../shared";
 import { useLatestBlocks } from "../model/use_latest_blocks";
 import "./LatestBlocks.scss";
 import LatestBlockItem from "./LatestBlockItem";
 
 export const LatestBlocks = () => {
-  const { blocks } = useLatestBlocks();
+  const { blocks, isLoading } = useLatestBlocks(false);
+
+  if (isLoading) <Spinner size="m" />;
+
   return (
     <Container className="latest-blocks">
       <div className="latest-blocks__header">

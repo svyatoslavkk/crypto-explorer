@@ -12,9 +12,12 @@ router.get("/blocks", async (req, res) => {
   );
 
   try {
-    const latestBlockNumber = await provider.getBlockNumber();
+    const before = parseInt(req.query.before as string);
+    const limit = parseInt(req.query.limit as string) || 5;
 
-    const blockPromises = Array.from({ length: 5 }, (_, i) =>
+    const latestBlockNumber = isNaN(before) ? await provider.getBlockNumber() : before - 1;
+
+    const blockPromises = Array.from({ length: limit }, (_, i) =>
       provider.getBlock(latestBlockNumber - i)
     );
 
@@ -31,7 +34,7 @@ router.get("/blocks", async (req, res) => {
 
     res.json(parsedBlocks);
   } catch (error) {
-    console.error("Ошибка получения блоков:", error);
+    console.error("Error fetching blocks:", error);
     res.status(500).json({ message: "Error fetching blocks" });
   }
 });
