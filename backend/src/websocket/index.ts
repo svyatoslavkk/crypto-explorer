@@ -1,11 +1,12 @@
 import { Server as WebSocketServer } from "ws";
 import { Server as HttpServer } from "http";
-import { tokenListener } from "../listeners/tokenListener";
+import { startEthWebSocket } from "../services/ethSocket";
 
 export const setupWebSocket = (server: HttpServer) => {
   const wss = new WebSocketServer({ server });
 
-  tokenListener(wss);
+  // tokenListener(wss);
+  startEthWebSocket(wss);
 
   wss.on("connection", ws => {
     console.log("Client connected to WebSocket");

@@ -1,5 +1,6 @@
 export const formatTimeAgo = (timestamp: number): string => {
-  const secondsAgo = Math.floor(Date.now() / 1000) - timestamp;
+  const now = Math.floor(Date.now() / 1000);
+  const secondsAgo = Math.max(0, now - timestamp);
 
   if (secondsAgo < 60) {
     return `${secondsAgo} sec ago`;

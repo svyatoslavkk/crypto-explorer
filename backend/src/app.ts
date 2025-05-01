@@ -7,6 +7,7 @@ import sepoliaTxs from "./routes/sepoliaTxs";
 import gas from "./routes/gas";
 import coins from "./routes/coins";
 import historicalPrices from "./routes/historicalPrices";
+import { setupWebSocket } from "./websocket";
 
 dotenv.config();
 
@@ -21,7 +22,7 @@ app.use("/api", coins);
 app.use("/api", historicalPrices);
 
 const server = createServer(app);
-// setupWebSocket(server);
+setupWebSocket(server);
 
 server.listen(PORT, () => {
   console.log(`HTTP + WebSocket Server is running on port ${PORT}`);

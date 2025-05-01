@@ -20,8 +20,8 @@ export const Txs = () => {
         {data?.pages.map((page, i) => (
           <div key={i} className="txs-container__list">
             {page.result.map(tx => (
-              <div className="txs-container__list__item">
-                <TxItem key={tx.hash} tx={tx} />
+              <div key={tx.hash} className="txs-container__list__item">
+                <TxItem tx={tx} />
               </div>
             ))}
           </div>
