@@ -1,0 +1,53 @@
+@use "../../styles/mixins" as *;
+
+.drawer {
+  &__overlay {
+    @include fixed-fill;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 999;
+
+    &--dark {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    &--blur {
+      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__container {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 400px;
+    height: 100%;
+    background: var(--bg-dark-secondary);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 1000;
+    transition: right 0.3s;
+    overflow-y: auto;
+
+    &__header {
+      @include flex-center-between(16px);
+    }
+  }
+
+  &__body {
+    margin-top: 20px;
+  }
+
+  &.open {
+    .drawer__overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer__container {
+      right: 0;
+    }
+  }
+}

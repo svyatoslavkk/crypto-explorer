@@ -30,3 +30,11 @@
   align-items: stretch;
   justify-content: space-between;
 }
+
+@mixin fixed-fill {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

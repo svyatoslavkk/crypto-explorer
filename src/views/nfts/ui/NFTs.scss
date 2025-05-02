@@ -1,0 +1,46 @@
+@use "../../../styles/mixins" as *;
+
+.nfts {
+  @include flex-column(16px);
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style-type: none;
+    &__item {
+      background-color: var(--bg-dark-secondary);
+      padding: 8px;
+      border-radius: 16px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--bg-dark-tertiary);
+      }
+    }
+  }
+
+  &__drawer {
+    @include flex-column(16px);
+    &__main {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      &__img {
+        width: 100%;
+        border-radius: 16px;
+      }
+    }
+
+    &__details {
+      @include flex-column(8px);
+      background-color: var(--bg-dark-tertiary);
+      border-radius: 16px;
+      padding: 16px;
+
+      &__param {
+        justify-content: space-between;
+      }
+    }
+  }
+}

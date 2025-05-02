@@ -4,7 +4,7 @@ import QueryProvider from "./app/ReactQueryProvider";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import { MainLayout } from "./layouts";
-import { Blocks, Txs } from "./views";
+import { Blocks, NFTs, Txs } from "./views";
 
 export const App = () => {
   return (
@@ -16,6 +16,7 @@ export const App = () => {
               <Route path="/:coinId" element={<Dashboard />} />
               <Route path="/blocks" element={<Blocks />} />
               <Route path="/txs" element={<Txs />} />
+              <Route path="/nfts" element={<NFTs />} />
             </Route>
           </Routes>
         </BrowserRouter>
