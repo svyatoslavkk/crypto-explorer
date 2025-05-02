@@ -1,14 +1,15 @@
 import { Chip, Column, CopyButton, Drawer, H, HorDivider, P, Row, Spinner } from "../../../shared";
 import { useNftDetails } from "../../../entities";
+import "./NftDrawer.scss";
 
 export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: () => void }) => {
   const { data, loading } = useNftDetails(nftId);
   return (
     <Drawer isOpen={!!nftId} title={data?.name} onClose={onClose} overlayType="blur">
       {data ? (
-        <div className="nfts__drawer">
-          <Column gap={16} className="nfts__drawer__main">
-            <img className="nfts__drawer__main__img" src={data.image?.small_2x} alt={data.name} />
+        <Column gap={16} className="nft-drawer">
+          <Column gap={16} className="nft-drawer__main">
+            <img className="nft-drawer__main__img" src={data.image?.small_2x} alt={data.name} />
             <Column>
               <Row gap={8}>
                 <H level={4}>{data?.name}</H>
@@ -22,10 +23,10 @@ export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: (
               </P>
             </Column>
           </Column>
-          <div className="nfts__drawer__details">
+          <div className="nft-drawer__details">
             <H level={5}>Details</H>
             <HorDivider />
-            <Row gap={16} className="nfts__drawer__details__param">
+            <Row gap={16} className="nft-drawer__details__param">
               <P color="secondary" size="sm">
                 Market cap
               </P>
@@ -34,7 +35,7 @@ export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: (
               </P>
             </Row>
             <HorDivider />
-            <Row gap={16} className="nfts__drawer__details__param">
+            <Row gap={16} className="nft-drawer__details__param">
               <P color="secondary" size="sm">
                 Total supply
               </P>
@@ -43,7 +44,7 @@ export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: (
               </P>
             </Row>
             <HorDivider />
-            <Row gap={16} className="nfts__drawer__details__param">
+            <Row gap={16} className="nft-drawer__details__param">
               <P color="secondary" size="sm">
                 Contract address
               </P>
@@ -51,12 +52,12 @@ export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: (
                 <P
                   color="primary"
                   size="sm"
-                >{`${data.contract_address.slice(0, 6)}...${data.contract_address.slice(-6)}`}</P>
+                >{`${data?.contract_address?.slice(0, 6)}...${data?.contract_address?.slice(-6)}`}</P>
                 <CopyButton size="sm" text={data.contract_address} />
               </Row>
             </Row>
             <HorDivider />
-            <Row gap={16} className="nfts__drawer__details__param">
+            <Row gap={16} className="nft-drawer__details__param">
               <P color="secondary" size="sm">
                 Native currency
               </P>
@@ -65,7 +66,7 @@ export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: (
               </P>
             </Row>
             <HorDivider />
-            <Row gap={16} className="nfts__drawer__details__param">
+            <Row gap={16} className="nft-drawer__details__param">
               <P color="secondary" size="sm">
                 1 day sales
               </P>
@@ -74,7 +75,7 @@ export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: (
               </P>
             </Row>
           </div>
-        </div>
+        </Column>
       ) : (
         <Spinner size="s" />
       )}

@@ -20,8 +20,13 @@ export const useNFTs = () => {
         const res = await fetch(`http://localhost:5000/api/nfts-list?${params}`);
         const data: Nft[] = await res.json();
 
-        setNfts(prev => [...prev, ...data]);
-        if (data.length < 100) setHasMore(false);
+        if (Array.isArray(data)) {
+          setNfts(prev => [...prev, ...data]);
+          if (data.length < 100) setHasMore(false);
+        } else {
+          console.error("Invalid data format:", data);
+          setHasMore(false);
+        }
       } catch (e) {
         console.error("Error loading NFTs", e);
       } finally {

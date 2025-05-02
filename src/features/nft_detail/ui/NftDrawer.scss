@@ -1,0 +1,25 @@
+@use "../../../styles/mixins" as *;
+
+.nft-drawer {
+  &__main {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    &__img {
+      width: 100%;
+      border-radius: 16px;
+    }
+  }
+
+  &__details {
+    @include flex-column(8px);
+    background-color: var(--bg-dark-tertiary);
+    border-radius: 16px;
+    padding: 16px;
+
+    &__param {
+      justify-content: space-between;
+    }
+  }
+}
