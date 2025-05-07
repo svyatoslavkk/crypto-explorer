@@ -1,7 +1,7 @@
+@use "../../../styles/mixins" as *;
+
 .blocks {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  @include flex-column(16px);
 
   &__list {
     display: flex;

@@ -7,6 +7,7 @@ import sepoliaTxs from "./routes/sepoliaTxs";
 import gas from "./routes/gas";
 import nftsList from "./routes/nftsList";
 import nftDataById from "./routes/nftDataById";
+import nftDataByContractAddress from "./routes/nftDataByContractAddress";
 import coins from "./routes/coins";
 import historicalPrices from "./routes/historicalPrices";
 import { setupWebSocket } from "./websocket";
@@ -22,6 +23,7 @@ app.use("/api", sepoliaTxs);
 app.use("/api", gas);
 app.use("/api", nftsList);
 app.use("/api", nftDataById);
+app.use("/api", nftDataByContractAddress);
 app.use("/api", coins);
 app.use("/api", historicalPrices);
 

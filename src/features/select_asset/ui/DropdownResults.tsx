@@ -32,8 +32,8 @@ const DropdownResults: React.FC<DropdownResultsProps> = ({
             index === activeIndex ? "active" : ""
           }`}
           onClick={() => {
-            if (items[activeIndex]?.id) {
-              navigate(`/${items[activeIndex].id}`);
+            if (item?.id) {
+              navigate(`/${item?.id}`);
             }
           }}
         >

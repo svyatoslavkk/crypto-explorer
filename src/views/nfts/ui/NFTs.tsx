@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Column, H } from "../../../shared";
+import { Column } from "../../../shared";
 import { NftList } from "../../../widgets";
 import { NftDrawer } from "../../../features";
 
@@ -8,7 +8,6 @@ export const NFTs = () => {
 
   return (
     <Column gap={16}>
-      <H level={2}>NFTs</H>
       <NftList onSelect={id => setSelectedId(id)} />
       <NftDrawer nftId={selectedId} onClose={() => setSelectedId(null)} />
     </Column>

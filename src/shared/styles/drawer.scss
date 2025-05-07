@@ -5,7 +5,7 @@
     @include fixed-fill;
     opacity: 0;
     visibility: hidden;
-    transition: 0.3s;
+    transition: 0.3s ease-in-out;
     z-index: 999;
 
     &--dark {
@@ -21,14 +21,15 @@
   &__container {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 400px;
     height: 100%;
     background: var(--bg-dark-secondary);
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.5);
-    padding: 20px;
+    padding: 16px;
     z-index: 1000;
-    transition: right 0.3s;
+    transform: translateX(100%);
+    transition: 0.3s ease-in-out;
     overflow-y: auto;
 
     &__header {
@@ -47,7 +48,7 @@
     }
 
     .drawer__container {
-      right: 0;
+      transform: translateX(0);
     }
   }
 }

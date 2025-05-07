@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Nft } from "./types";
+import { NftA } from "./types";
 
 export const useNFTs = () => {
-  const [nfts, setNfts] = useState<Nft[]>([]);
+  const [nfts, setNfts] = useState<NftA[]>([]);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -18,7 +18,7 @@ export const useNFTs = () => {
         });
 
         const res = await fetch(`http://localhost:5000/api/nfts-list?${params}`);
-        const data: Nft[] = await res.json();
+        const data: NftA[] = await res.json();
 
         if (Array.isArray(data)) {
           setNfts(prev => [...prev, ...data]);

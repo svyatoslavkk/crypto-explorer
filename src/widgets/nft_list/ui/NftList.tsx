@@ -1,25 +1,46 @@
-import { useNftInfiniteScroll } from "../model/use_nft_infinite_scroll";
-import { Column, H, P, Spinner } from "../../../shared";
+import { Column, CopyButton, P, Row, Spinner } from "../../../shared";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEthereum } from "@fortawesome/free-brands-svg-icons";
+import { useNFTsB } from "../../../entities";
 import "./NftList.scss";
 
 export const NftList = ({ onSelect }: { onSelect: (id: string) => void }) => {
-  const { nfts, loading, loaderRef } = useNftInfiniteScroll();
+  const { nfts, loading } = useNFTsB();
+
+  if (loading) return <Spinner size="m" />;
 
   return (
-    <Column gap={16}>
-      <ul className="nft-list">
-        {nfts.length > 0 &&
-          nfts.map(nft => (
-            <li key={nft.id} className="nft-list__item" onClick={() => onSelect(nft.id)}>
-              <H level={5}>{nft.name}</H>
-              <P size="sm" color="secondary">
-                {`${nft.contract_address?.slice(0, 8)}...${nft.contract_address?.slice(-8)}` || "0"}
-              </P>
-            </li>
-          ))}
-      </ul>
-      {loading && <Spinner size="m" className="nft-list__loader" />}
-      <div ref={loaderRef} style={{ height: 16 }} />
-    </Column>
+    <ul className="nft-list">
+      {nfts.map(nft => (
+        <li
+          key={nft.collection_title}
+          className="nft-list__item"
+          onClick={() => onSelect(nft.collection_address)}
+        >
+          <div className="nft-list__item__rank">{nft.rank}</div>
+          <img
+            className="nft-list__item__img"
+            src={nft.collection_image}
+            alt={`${nft.collection_title}'s image`}
+          />
+          <Column gap={8} className="nft-list__item__info">
+            <Column gap={4}>
+              <P size="sm">{nft.collection_title}</P>
+              <Row gap={4}>
+                <P
+                  size="xs"
+                  color="secondary"
+                >{`${nft.collection_address.slice(0, 6)}...${nft.collection_address.slice(-6)}`}</P>
+                <CopyButton text={nft.collection_address} size="sm" />
+              </Row>
+            </Column>
+            <Row gap={8}>
+              <FontAwesomeIcon icon={faEthereum} size="sm" />
+              <P size="xs">{nft.floor_price} ETH</P>
+            </Row>
+          </Column>
+        </li>
+      ))}
+    </ul>
   );
 };

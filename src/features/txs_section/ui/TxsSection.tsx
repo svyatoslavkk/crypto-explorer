@@ -1,12 +1,12 @@
 import { Button, Container, EthTx, H, Spinner } from "../../../shared";
 import "./TxsSection.scss";
-import { useFetchTransactions } from "../../input_wallet/model/useFetchTransactions";
 import TxItem from "./TxItem";
+import { useFetchLatestTxs } from "../model/use_fetch_latest_txs";
 
 const TxsSection = () => {
-  const { data, isLoading, error } = useFetchTransactions();
+  const { data, isLoading, error } = useFetchLatestTxs();
 
-  const txs: EthTx[] | undefined = data?.pages.flatMap(page => page.result);
+  const txs: EthTx[] | undefined = data?.result;
   if (!data) return null;
 
   return (

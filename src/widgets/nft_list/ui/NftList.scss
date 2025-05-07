@@ -1,24 +1,47 @@
 @use "../../../styles/mixins" as *;
 
 .nft-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  list-style-type: none;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 16px;
   &__item {
+    @include flex-column(16px);
+    position: relative;
     background-color: var(--bg-dark-secondary);
-    padding: 8px;
+    padding: 16px;
     border-radius: 16px;
-    cursor: pointer;
+    justify-content: space-between;
+    height: 100%;
+    transition: 0.15s ease-in-out;
 
     &:hover {
       background-color: var(--bg-dark-tertiary);
     }
-  }
+    &__info {
+      @include flex-column(0px);
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+    &__rank {
+      @include flex-center-center(0px);
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background-color: #b6ff24;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0b0b0b;
+      border: 1px solid #0b0b0b;
+    }
 
-  &__loader {
-    @include flex-center-center(0px);
-    align-self: center;
+    &__img {
+      border-radius: 16px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
   }
 }

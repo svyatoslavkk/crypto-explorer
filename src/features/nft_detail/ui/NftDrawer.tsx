@@ -1,19 +1,23 @@
 import { Chip, Column, CopyButton, Drawer, H, HorDivider, P, Row, Spinner } from "../../../shared";
-import { useNftDetails } from "../../../entities";
+import { useNftDetailsByContract } from "../../../entities";
 import "./NftDrawer.scss";
 
 export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: () => void }) => {
-  const { data, loading } = useNftDetails(nftId);
+  const { data, loading } = useNftDetailsByContract(nftId);
   return (
     <Drawer isOpen={!!nftId} title={data?.name} onClose={onClose} overlayType="blur">
-      {data ? (
+      {loading || !data ? (
+        <Spinner size="s" />
+      ) : (
         <Column gap={16} className="nft-drawer">
           <Column gap={16} className="nft-drawer__main">
             <img className="nft-drawer__main__img" src={data.image?.small_2x} alt={data.name} />
             <Column>
               <Row gap={8}>
                 <H level={4}>{data?.name}</H>
-                <Chip label={`#${data.market_cap_rank}`} color="primary" />
+                {data.market_cap_rank && (
+                  <Chip label={`#${data.market_cap_rank}`} color="primary" />
+                )}
               </Row>
               <P size="sm" color="primary">
                 Starts from{" "}
@@ -76,8 +80,6 @@ export const NftDrawer = ({ nftId, onClose }: { nftId: string | null; onClose: (
             </Row>
           </div>
         </Column>
-      ) : (
-        <Spinner size="s" />
       )}
     </Drawer>
   );
